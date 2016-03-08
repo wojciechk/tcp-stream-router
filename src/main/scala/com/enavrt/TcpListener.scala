@@ -31,7 +31,7 @@ class TcpListener(dest:ActorRef) extends Actor with ActorLogging {
   override def receive: Receive = LoggingReceive {
 
     case m: ByteString =>{
-      log.info(s"\t-->${m.utf8String}<--")
+      log.debug(s"\t-->${m.utf8String}<--")
       flow ! m
     }
 

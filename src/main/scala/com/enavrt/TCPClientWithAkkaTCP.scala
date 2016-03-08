@@ -23,7 +23,7 @@ object TCPClientWithAkkaTCP extends App {
     }
 
 
-  val processor = system.actorOf(Props[EchoActor])
+  val processor = system.actorOf(Props[AisDecoder])
   val listener = system.actorOf(TcpListener.props(processor))
 
   val client=system.actorOf(Client.props(new InetSocketAddress(address,port),listener))
