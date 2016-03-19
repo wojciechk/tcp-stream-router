@@ -2,6 +2,7 @@ package com.enavrt
 
 import akka.actor.{ActorLogging, Actor, Props}
 import akka.event.LoggingReceive
+import dk.dma.ais.message.AisMessage
 import dk.dma.ais.packet.AisPacket
 
 /**
@@ -18,7 +19,8 @@ class AisDecoder extends Actor with ActorLogging{
 
       val p=AisPacket.readFromString(m)
       if(p!=null) {
-        log.info(s"${p.tryGetAisMessage()}")
+        val message: AisMessage = p.tryGetAisMessage
+        log.info(s"${message}")
       }
       else {
         log.warning(s"could not decode $m")
