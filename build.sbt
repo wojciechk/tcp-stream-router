@@ -1,4 +1,5 @@
-name := """ais-server"""
+name := """tcp-stream-router"""
+
 
 version := "1.0"
 
@@ -12,14 +13,8 @@ resolvers += Resolver.mavenLocal
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "com.typesafe.akka" %% "akka-camel" % akkaVersion,
   "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
   "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
-  "com.typesafe.akka" % "akka-stream-experimental_2.11" % "2.0.3",
-  "org.apache.camel" % "camel-mina2" % "2.16.2",
-  "org.apache.camel" % "camel-netty4" % "2.16.2",
-  "dk.dma.ais.lib" % "ais-lib-messages" % "2.3-SNAPSHOT",
-  "dk.dma.ais.lib" % "ais-lib-communication" % "2.3-SNAPSHOT",
   "ch.qos.logback" % "logback-classic" % "1.0.7",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test")
 

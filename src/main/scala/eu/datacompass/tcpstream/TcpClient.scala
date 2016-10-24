@@ -1,23 +1,22 @@
-package com.enavrt
+package eu.datacompass.tcpstream
 
-import scala.concurrent.duration._
-import akka.actor.{ActorLogging, Actor, ActorRef, Props}
-import akka.event.LoggingReceive
-import akka.io.{ IO, Tcp }
-import akka.util.ByteString
 import java.net.InetSocketAddress
 
-object Client {
+import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.event.LoggingReceive
+import akka.io.{IO, Tcp}
+
+import scala.concurrent.duration._
+
+object TcpClient {
   def props(remote: InetSocketAddress, replies: ActorRef) =
-    Props(classOf[Client], remote, replies)
+    Props(classOf[TcpClient], remote, replies)
 }
 
-class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor with ActorLogging  {
+class TcpClient(remote: InetSocketAddress, listener: ActorRef) extends Actor with ActorLogging {
 
   import Tcp._
   import context.system
-
-
 
   def connect: Unit = {
     IO(Tcp) ! Connect(remote)
@@ -35,19 +34,18 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor with A
         scheduleOnce(2 seconds) {
           connect
         }
-//      context stop self
 
-    case c @ Connected(remote, local) =>
+    case c@Connected(remote, local) =>
+      log.info("Connected")
       listener ! c
       val connection = sender()
       connection ! Register(self)
       context become {
-        case data: ByteString =>
-          connection ! Write(data)
         case CommandFailed(w: Write) =>
           // O/S buffer was full
           listener ! "write failed"
         case Received(data) =>
+          log.debug(s"received Received(data): $data")
           listener ! data
         case "close" =>
           connection ! Close
@@ -57,7 +55,6 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor with A
           connect
       }
   }
-  def props(address: String, port: Int, listener: ActorRef): Props = Props(new Client(new InetSocketAddress(address, port), listener))
 
-
+  def props(address: String, port: Int, listener: ActorRef): Props = Props(new TcpClient(new InetSocketAddress(address, port), listener))
 }
