@@ -1,4 +1,9 @@
-activator-akka-scala-seed
+tcp-stream-router
 =========================
 
-A minimal seed template for an Akka with Scala build 
+A router that connects to a streaming socket as client and exposes a server socket.
+
+Usage:
+
+`java -jar tcp-stream-router.jar  (source streaming host) (source streaming port) (destination server host) (destination server port)`
+

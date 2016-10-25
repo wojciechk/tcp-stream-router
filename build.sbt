@@ -5,6 +5,8 @@ version := "1.0"
 
 scalaVersion := "2.11.7"
 
+mainClass := Some("eu.datacompass.tcpstream.Main")
+
 lazy val akkaVersion = "2.4.0"
 
 resolvers += Resolver.url("dma-snapshot", url("https://repository-dma.forge.cloudbees.com/snapshot/"))
