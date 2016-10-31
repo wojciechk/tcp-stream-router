@@ -9,8 +9,6 @@ mainClass := Some("eu.datacompass.tcpstream.Main")
 
 lazy val akkaVersion = "2.4.0"
 
-resolvers += Resolver.url("dma-snapshot", url("https://repository-dma.forge.cloudbees.com/snapshot/"))
-resolvers += Resolver.url("dma-release", url("https://repository-dma.forge.cloudbees.com/release/"))
 resolvers += Resolver.mavenLocal
 
 libraryDependencies ++= Seq(
