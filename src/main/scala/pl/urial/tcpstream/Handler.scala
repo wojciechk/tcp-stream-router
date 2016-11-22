@@ -1,4 +1,4 @@
-package eu.datacompass.tcpstream
+package pl.urial.tcpstream
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.event.LoggingReceive

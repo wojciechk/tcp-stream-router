@@ -1,4 +1,4 @@
-package eu.datacompass.tcpstream
+package pl.urial.tcpstream
 
 import java.net.InetSocketAddress
 

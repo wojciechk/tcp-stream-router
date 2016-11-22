@@ -1,7 +1,8 @@
 tcp-stream-router
 =========================
 
-A router that connects to a streaming socket as client and exposes a server socket.
+A simple TCP data stream broadcasting router based on Akka actors that connects as client to a socket outputing data and exposes a server socket for others to connect to.
+
 
 Usage:
 
